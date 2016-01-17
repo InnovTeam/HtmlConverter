@@ -21,7 +21,7 @@ public class GenerateProperties extends Html {
     OutputStream output;
     try {
       output = new FileOutputStream(getSettings().getPropertyFileName());
-      final String pageName = getSettings().getHtmlFileName();
+      final String pageName = getSettings().getJspPageName();
       for (Element label : labels) {
         if (label.hasText()) {
           String labelName = label.attr("for");

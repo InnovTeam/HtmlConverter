@@ -70,7 +70,7 @@ public class ScanHtml {
         Elements options = selectTag.select("option");
         for (Element element : options) {
           String text = element.text();
-          if (!text.contains("SelectHtml")) {
+          if (!text.contains("GenerateSelectHtml")) {
 
             JEnumConstant enumConst = enumClass.enumConstant(text.toUpperCase());
             enumConst.arg(JExpr.lit(text));

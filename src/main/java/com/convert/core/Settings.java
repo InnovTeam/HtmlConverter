@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class Settings {
   final static Map<String, List<String>> selectList = new HashMap<String, List<String>>();
-
   private String htmlFileName;
   private String jspPageName;
   private String propertyFileName;

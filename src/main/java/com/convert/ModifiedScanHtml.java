@@ -5,8 +5,8 @@ import java.io.IOException;
 import com.convert.core.ProcessTemplate;
 import com.convert.core.Settings;
 import com.convert.core.html.GenerateProperties;
-import com.convert.core.html.SelectHtml;
-import com.convert.core.model.SelectModel;
+import com.convert.core.html.GenerateSelectHtml;
+import com.convert.core.model.GenerateSelectModel;
 
 import freemarker.template.Configuration;
 
@@ -19,11 +19,11 @@ public class ModifiedScanHtml {
   public static void main(String[] args) throws IOException {
     final Settings htmlSettings = new Settings();
     htmlSettings.setHtmlFileName("identification.html");
-    htmlSettings.setJspPageName("identification.jsp");
+    htmlSettings.setJspPageName("identification");
     htmlSettings.setPropertyFileName("src/main/resources/config.properties");
     final ProcessTemplate processTemplate = new ProcessTemplate();
     processTemplate.setSettings(htmlSettings);
-    processTemplate.addProcess(new SelectHtml()).addProcess(new SelectModel()).addProcess(new GenerateProperties());
+    processTemplate.addProcess(new GenerateSelectHtml()).addProcess(new GenerateSelectModel()).addProcess(new GenerateProperties());
     processTemplate.execute();
     Configuration cfg = new Configuration();
     
@@ -53,7 +53,7 @@ public class ModifiedScanHtml {
      * enumConstructor.body().assign(JExpr._this().ref("column"),
      * JExpr.ref("column")); Elements options = selectTag.select("option"); for
      * (Element element : options) { String text = element.text(); if
-     * (!text.contains("SelectHtml")) {
+     * (!text.contains("GenerateSelectHtml")) {
      * 
      * JEnumConstant enumConst = enumClass.enumConstant(text.toUpperCase());
      * enumConst.arg(JExpr.lit(text)); }

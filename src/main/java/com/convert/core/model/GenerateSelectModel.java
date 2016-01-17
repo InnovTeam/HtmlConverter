@@ -22,7 +22,7 @@ import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JVar;
 
-public class SelectModel extends Model {
+public class GenerateSelectModel extends Model {
 
   @Override
   public void invoke() {
