@@ -1,28 +1,12 @@
 package com.convert;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Properties;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-import org.jsoup.select.Elements;
-
-import com.convert.core.HtmlSingleton;
-import com.convert.core.ModelSingleton;
-import com.sun.codemodel.ClassType;
-import com.sun.codemodel.JClassAlreadyExistsException;
-import com.sun.codemodel.JCodeModel;
-import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JEnumConstant;
-import com.sun.codemodel.JExpr;
-import com.sun.codemodel.JFieldVar;
-import com.sun.codemodel.JMethod;
-import com.sun.codemodel.JMod;
+import com.convert.core.ProcessTemplate;
+import com.convert.core.Settings;
+import com.convert.core.html.GenerateProperties;
+import com.convert.core.html.SelectHtml;
+import com.convert.core.model.SelectModel;
 
 import freemarker.template.Configuration;
 
@@ -33,24 +17,16 @@ public class ModifiedScanHtml {
    * @throws IOException 
    */
   public static void main(String[] args) throws IOException {
-    // Freemarker configuration object
+    final Settings htmlSettings = new Settings();
+    htmlSettings.setHtmlFileName("identification.html");
+    htmlSettings.setJspPageName("identification.jsp");
+    htmlSettings.setPropertyFileName("src/main/resources/config.properties");
+    final ProcessTemplate processTemplate = new ProcessTemplate();
+    processTemplate.setSettings(htmlSettings);
+    processTemplate.addProcess(new SelectHtml()).addProcess(new SelectModel()).addProcess(new GenerateProperties());
+    processTemplate.execute();
     Configuration cfg = new Configuration();
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();
-    InputStream is = loader.getResourceAsStream("identification.html");
-    HtmlSingleton.setHTMLFile(is);
-    ModelSingleton.addSelectModel(HtmlSingleton.getAllSelectOptions());
-    final Elements labels = HtmlSingleton.getHtml().select("label");
-    Properties prop = new Properties();
-    OutputStream output = new FileOutputStream("src/main/resources/config.properties");
-    final String pageName = "identification";
-    for(Element label : labels) {
-      if (label.hasText()) { 
-        String labelName = label.attr("for"); 
-        String pageNameText = pageName + ".label." + labelName; 
-        prop.setProperty(pageNameText, label.text());
-     }
-    }
-    prop.store(output, "identification ui properties");
+    
     /*
      * try { Document doc = Jsoup.parse(new File("./src/identification.html"),
      * "UTF-8");
@@ -77,7 +53,7 @@ public class ModifiedScanHtml {
      * enumConstructor.body().assign(JExpr._this().ref("column"),
      * JExpr.ref("column")); Elements options = selectTag.select("option"); for
      * (Element element : options) { String text = element.text(); if
-     * (!text.contains("Select")) {
+     * (!text.contains("SelectHtml")) {
      * 
      * JEnumConstant enumConst = enumClass.enumConstant(text.toUpperCase());
      * enumConst.arg(JExpr.lit(text)); }
@@ -91,7 +67,6 @@ public class ModifiedScanHtml {
      * 
      * "return list"); codeModel.build(new File("src")); }
      * 
-     * // generateEnum();
      * 
      * Elements links = doc.getElementsByTag("script"); data.put("javascripts",
      * links); Elements styles = doc.getElementsByTag("link");
@@ -138,55 +113,6 @@ public class ModifiedScanHtml {
      * e.printStackTrace(); }
      */
 
-  }
-
-  private static void generateEnum() throws JClassAlreadyExistsException, IOException {
-    JCodeModel codeModel = new JCodeModel();
-    JDefinedClass enumClass = codeModel._class("com.foo.Bar", ClassType.ENUM);
-    // This code creates field within the enum class
-    JFieldVar columnField = enumClass.field(JMod.PRIVATE | JMod.FINAL, String.class, "column");
-    JFieldVar filterableField = enumClass.field(JMod.PRIVATE | JMod.FINAL, codeModel.BOOLEAN, "filterable");
-
-    // Define the enum constructor
-    JMethod enumConstructor = enumClass.constructor(JMod.PRIVATE);
-    enumConstructor.param(String.class, "column");
-    enumConstructor.param(codeModel.BOOLEAN, "filterable");
-    enumConstructor.body().assign(JExpr._this().ref("column"), JExpr.ref("column"));
-    enumConstructor.body().assign(JExpr._this().ref("filterable"), JExpr.ref("filterable"));
-
-    JMethod getterColumnMethod = enumClass.method(JMod.PUBLIC, String.class, "getColumn");
-    getterColumnMethod.body()._return(columnField);
-    JMethod getterFilterMethod = enumClass.method(JMod.PUBLIC, codeModel.BOOLEAN, "isFilterable");
-    getterFilterMethod.body()._return(filterableField);
-
-    JEnumConstant enumConst = enumClass.enumConstant("FOO_BAR");
-    enumConst.arg(JExpr.lit("fooBar"));
-    enumConst.arg(JExpr.lit(true));
-    codeModel.build(new File("src"));
-    /*
-     * //creating an enum class within our main class JDefinedClass enumClass =
-     * codeModel._class(JMod.PUBLIC, "REPORT_COLUMNS"); //This code creates
-     * field within the enum class JFieldVar columnField =
-     * enumClass.field(JMod.PRIVATE|JMod.FINAL, String.class, "column");
-     * JFieldVar filterableField = enumClass.field(JMod.PRIVATE|JMod.FINAL,
-     * codeModel.BOOLEAN, "filterable");
-     */
-  }
-
-  private static void getSelectTags() {
-
-  }
-
-  private static void removeComments(Node node) {
-    for (int i = 0; i < node.childNodes().size();) {
-      Node child = node.childNode(i);
-      if (child.nodeName().equals("#comment"))
-        child.remove();
-      else {
-        removeComments(child);
-        i++;
-      }
-    }
   }
 
 }
