@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.convert.core.Html;
+import com.convert.core.Settings;
 
 public class GenerateProperties extends Html {
   Properties prop = new Properties();
@@ -20,8 +21,8 @@ public class GenerateProperties extends Html {
     final Elements labels = getHtml().select(LABEL);
     OutputStream output;
     try {
-      output = new FileOutputStream(getSettings().getPropertyFileName());
-      final String pageName = getSettings().getJspPageName();
+      output = new FileOutputStream(Settings.propertyFileName);
+      final String pageName = Settings.JSP_PAGENAME;
       for (Element label : labels) {
         if (label.hasText()) {
           String labelName = label.attr("for");

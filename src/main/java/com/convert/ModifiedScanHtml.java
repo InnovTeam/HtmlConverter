@@ -18,9 +18,6 @@ public class ModifiedScanHtml {
    */
   public static void main(String[] args) throws IOException {
     final Settings htmlSettings = new Settings();
-    htmlSettings.setHtmlFileName("identification.html");
-    htmlSettings.setJspPageName("identification");
-    htmlSettings.setPropertyFileName("src/main/resources/config.properties");
     final ProcessTemplate processTemplate = new ProcessTemplate();
     processTemplate.setSettings(htmlSettings);
     processTemplate.addProcess(new GenerateSelectHtml()).addProcess(new GenerateSelectModel()).addProcess(new GenerateProperties());
@@ -31,7 +28,7 @@ public class ModifiedScanHtml {
      * try { Document doc = Jsoup.parse(new File("./src/identification.html"),
      * "UTF-8");
      * 
-     * // Load template from source folder Template template =
+     * // Load template from source folder OutputTemplate template =
      * cfg.getTemplate("src/com/convert/template/jsp/struts2.ftl");
      * 
      * // Build the data-model Map<String, Object> data = new HashMap<String,
@@ -73,7 +70,7 @@ public class ModifiedScanHtml {
      * data.put("styles", styles); // links.remove(); Elements labels =
      * doc.select("label"); Properties prop = new Properties(); OutputStream
      * output = null; output = new FileOutputStream("config.properties");
-     * Template templateLabels =
+     * OutputTemplate templateLabels =
      * cfg.getTemplate("src/com/convert/template/label/struts2.ftl"); for
      * (Element label : labels) { if (label.hasText()) { String labelName =
      * label.attr("for"); String pageNameText = pageName + ".label." +

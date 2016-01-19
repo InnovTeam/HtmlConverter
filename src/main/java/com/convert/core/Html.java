@@ -9,18 +9,18 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public abstract class Html extends Process {
-  private Document html;
+  private static Document html;
   private Map<String, List<String>> selects;
 
   public Map<String, List<String>> getSelects() {
     return selects;
   }
 
-  protected Document getHtml() {
+  public static Document getHtml() {
 
     if (html == null) {
       try {
-        InputStream is = Html.class.getResourceAsStream(getSettings().getHtmlFileName());
+        InputStream is = Html.class.getResourceAsStream(Settings.HTML_FILENAME);
         html = Jsoup.parse(is, "UTF-8", "");
       } catch (IOException e) {
         e.printStackTrace();

@@ -1,1 +1,1 @@
-<s:text name="${pageName}.label.${labelName}" />
+<s:text name="${labelName}" />
