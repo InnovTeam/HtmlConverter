@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"
+	xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<localRepository>D:/poc</localRepository>
+   <proxies>
+    <proxy>
+      <id>optional</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <username>cts_id</username>
+      <password>cts_passwd</password>
+      <host>proxy.cognizant.com</host>
+      <port>6050</port>
+      <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+    </proxy>
+    
+  </proxies>
+	    <!-- <mirrors>
+		<mirror>
+			<mirrorOf>*</mirrorOf>
+			<name>libs-release</name>
+			<url>http://maven/libs-release</url>
+			<id>libs-release</id>
+		</mirror>
+	</mirrors>
+	<profiles>
+		<profile>
+			<id>offshore-build</id>
+			<repositories>
+				<repository>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>central</id>
+					<name>libs-release</name>
+					<url>http://maven/libs-release</url>
+				</repository>
+				<repository>
+					<snapshots />
+					<id>snapshots</id>
+					<name>libs-snapshot</name>
+					<url>http://maven/libs-snapshot</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>central</id>
+					<name>plugins-release</name>
+					<url>http://maven/plugins-release</url>
+				</pluginRepository>
+				<pluginRepository>
+					<snapshots />
+					<id>snapshots</id>
+					<name>plugins-snapshot</name>
+					<url>http://maven/plugins-snapshot</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+	<activeProfiles>
+		<activeProfile>offshore-build</activeProfile>
+	</activeProfiles>  -->
+</settings>
