@@ -15,12 +15,13 @@ public abstract class OutputTemplate {
     try {
       if(cfg == null){
         cfg = new Configuration();
-        FileTemplateLoader ftl = new FileTemplateLoader(new File("/tmp/templates"));
-       // FileTemplateLoader ftl2 = new FileTemplateLoader(new File("/usr/data/templates"));
-        TemplateLoader[] loaders = new TemplateLoader[] { ftl};
-        MultiTemplateLoader mtl = new MultiTemplateLoader(loaders);
-        cfg.setTemplateLoader(mtl);
       }
+      ClassLoader cl = Thread.currentThread().getContextClassLoader();
+      //InputStream is = cl.getResourceAsStream(Settings.BASE_TEMPLATE_DIR+"/"+Settings.VERSION);
+      FileTemplateLoader ftl = new FileTemplateLoader(new File(cl.getResource(Settings.BASE_TEMPLATE_DIR+"/"+Settings.VERSION).getFile()));
+      TemplateLoader[] loaders = new TemplateLoader[] { ftl};
+      MultiTemplateLoader mtl = new MultiTemplateLoader(loaders);
+      cfg.setTemplateLoader(mtl);
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

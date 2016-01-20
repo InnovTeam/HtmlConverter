@@ -30,7 +30,7 @@ public class LabelProcessor extends HtmlProcessor {
     try {
       final Elements labels = doc.select(FIELD);
       Properties prop = new Properties();
-      Template templateLabels = configuration.getTemplate(Settings.BASE_TEMPLATE_DIR+"/"+Settings.VERSION+"/"+TEMPLATE_FILE);
+      Template templateLabels = configuration.getTemplate(TEMPLATE_FILE);
       OutputStream output = new FileOutputStream(Settings.propertyFileName);
       Map<String, Object> data = new HashMap<String, Object>();
       for (Element label : labels) {
@@ -41,7 +41,8 @@ public class LabelProcessor extends HtmlProcessor {
           data.put("labelName", pageNameText);
           StringWriter writer = new StringWriter();
           templateLabels.process(data, writer);
-          label.html(writer.getBuffer().toString());
+          label.after(writer.getBuffer().toString());
+          label.remove();
         }
       }
 

@@ -1,14 +1,15 @@
 package com.convert;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 
-import com.convert.core.ProcessTemplate;
-import com.convert.core.Settings;
-import com.convert.core.html.GenerateProperties;
-import com.convert.core.html.GenerateSelectHtml;
-import com.convert.core.model.GenerateSelectModel;
-
-import freemarker.template.Configuration;
+import com.convert.core.Html;
+import com.convert.core.html.processor.HtmlProcessor;
+import com.convert.core.html.processor.InputProcessor;
+import com.convert.core.html.processor.LabelProcessor;
+import com.convert.core.html.processor.SelectProcessor;
 
 public class ModifiedScanHtml {
 
@@ -16,13 +17,24 @@ public class ModifiedScanHtml {
    * @param args
    * @throws IOException 
    */
-  public static void main(String[] args) throws IOException {
-    final Settings htmlSettings = new Settings();
-    final ProcessTemplate processTemplate = new ProcessTemplate();
+  public static void main(String[] args) throws Exception {
+	final HtmlProcessor labelProcessor = new LabelProcessor();
+    final HtmlProcessor inputProcessor = new InputProcessor();
+    final HtmlProcessor selectProcessor = new SelectProcessor();
+    labelProcessor.setSuccessor(inputProcessor);
+    inputProcessor.setSuccessor(selectProcessor);
+    labelProcessor.process();
+    final String html = Html.getHtml().html();
+    Writer file = new FileWriter(new File("helloworld.jsp"));
+    file.write(html);
+    file.flush();
+    file.close();
+    
+    /*final ProcessTemplate processTemplate = new ProcessTemplate();
     processTemplate.setSettings(htmlSettings);
     processTemplate.addProcess(new GenerateSelectHtml()).addProcess(new GenerateSelectModel()).addProcess(new GenerateProperties());
     processTemplate.execute();
-    Configuration cfg = new Configuration();
+    Configuration cfg = new Configuration();*/
     
     /*
      * try { Document doc = Jsoup.parse(new File("./src/identification.html"),

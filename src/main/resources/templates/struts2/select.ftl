@@ -1,4 +1,4 @@
-<s:select list="@com.erac.odyrntrgui.presentation.common.util.SalutationsType@getSalutations()"
-                  headerKey="" headerValue="" name="$selectId"
+<s:select list="${modelClass}"
+                  headerKey="" headerValue="" name="${pageName}.${selectId}"
                   value=""
-                  cssClass="$cssClass" id="$pageName.$selectId" />
+                  cssClass="${cssClass}" id="${selectId}" />

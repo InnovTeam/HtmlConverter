@@ -1,3 +1,1 @@
-<s:textfield name="$name"
-                  value=""
-                  cssClass="$cssClass" maxlength="$maxlength" cssErrorClass="$cssErrorClass"/>
+<s:textfield name="${inputId}" value="" id="${inputId}" cssClass="${inputCss}" />
