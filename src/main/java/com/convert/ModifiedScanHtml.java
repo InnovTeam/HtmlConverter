@@ -9,6 +9,7 @@ import com.convert.core.Html;
 import com.convert.core.html.processor.HtmlProcessor;
 import com.convert.core.html.processor.InputProcessor;
 import com.convert.core.html.processor.LabelProcessor;
+import com.convert.core.html.processor.PostProcessor;
 import com.convert.core.html.processor.SelectProcessor;
 
 public class ModifiedScanHtml {
@@ -24,6 +25,8 @@ public class ModifiedScanHtml {
     labelProcessor.setSuccessor(inputProcessor);
     inputProcessor.setSuccessor(selectProcessor);
     labelProcessor.process();
+    final PostProcessor postProcessor = new PostProcessor();
+    postProcessor.output();
     final String html = Html.getHtml().html();
     Writer file = new FileWriter(new File("helloworld.jsp"));
     file.write(html);

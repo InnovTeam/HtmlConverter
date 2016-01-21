@@ -1,20 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!doctype html>
 <html lang="en">
- <head> 
-  <meta charset="utf-8"> 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"> 
-  <meta name="description" content=""> 
-  <meta name="author" content=""> 
-  <link rel="shortcut icon" href="images/favicon.ico"> 
+ <head>       
   <title>Renter Maintenance</title> 
-  <!-- Bootstrap core CSS --> 
-  <link href="css/bootstrap.css" rel="stylesheet"> 
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css"> 
-  <!-- Custom styles for this template --> 
-  <link href="css/bootstrap-overwrite.css" rel="stylesheet"> 
-  <link href="css/global.css" rel="stylesheet"> 
-  <link rel="stylesheet" href="css/renter.css"> 
+  <!-- Bootstrap core CSS -->   
+  <!-- Custom styles for this template -->    
   <!-- Just for debugging purposes. Don't actually copy these 2 lines! --> 
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]--> 
   <!--[if lt IE 9]>
@@ -622,16 +613,6 @@
   <!--page footer section end--> 
   <!-- Bootstrap core JavaScript
     ================================================== --> 
-  <!-- Placed at the end of the document so the pages load faster --> 
-  <script src="js/libs/jquery.min.js"></script> 
-  <script src="js/libs/bootstrap.min.js"></script> 
-  <script type="text/javascript" src="js/libs/bootstrap-datepicker.js"></script> 
-  <script type="text/javascript" src="js/libs/modernizr.js"></script> 
-  <script type="text/javascript" src="js/libs/jquery.validate.js"></script> 
-  <script type="text/javascript" src="js/libs/div-clone.js"></script> 
-  <script src="js/libs/responsive-tabs.js"></script> 
-  <script src="js/common/global.js"></script> 
-  <script src="js/renter/searchRenter.js"></script> 
-  <script src="js/create/create-identification.js"></script>  
+  <!-- Placed at the end of the document so the pages load faster -->            
  </body>
 </html>

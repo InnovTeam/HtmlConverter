@@ -17,7 +17,6 @@ public abstract class OutputTemplate {
         cfg = new Configuration();
       }
       ClassLoader cl = Thread.currentThread().getContextClassLoader();
-      //InputStream is = cl.getResourceAsStream(Settings.BASE_TEMPLATE_DIR+"/"+Settings.VERSION);
       FileTemplateLoader ftl = new FileTemplateLoader(new File(cl.getResource(Settings.BASE_TEMPLATE_DIR+"/"+Settings.VERSION).getFile()));
       TemplateLoader[] loaders = new TemplateLoader[] { ftl};
       MultiTemplateLoader mtl = new MultiTemplateLoader(loaders);
